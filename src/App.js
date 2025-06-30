@@ -1,35 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Mail, Instagram, Twitter, Linkedin, Palette, Megaphone, PenTool, BookOpen, ChevronDown, ArrowUpRight, Star } from 'lucide-react';
-
-// Floating shapes for hero section background
-const FloatingShapes = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    {[...Array(6)].map((_, i) => (
-      <div
-        key={i}
-        className={`absolute animate-float-${i} opacity-20 rounded-full bg-gradient-to-br
-          ${i % 2 === 0 ? 'from-pink-400 to-purple-500' : 'from-cyan-400 to-blue-500'}
-          ${i % 3 === 0 ? 'w-32 h-32' : 'w-48 h-48'}`}
-        style={{
-          left: `${(i * 20) % 80}%`,
-          top: `${(i * 15) % 70}%`,
-          animationDelay: `${i * 0.5}s`,
-          animationDuration: `${8 + i * 2}s`
-        }}
-      />
-    ))}
-  </div>
-);
+import React, { useState, useEffect } from 'react';
+import { Instagram, Mail, Facebook, Youtube, Globe, ArrowRight } from 'lucide-react';
+import Logo from './assets/images/logo/logo.png'
+import FooterLogo from './assets/images/logo/footer-logo.png'
+import andrews from './assets/images/brands/andrews.jpg';
+import ashar from './assets/images/brands/ashar.jpg';
+import boutique from './assets/images/brands/boutique.jpg';
+import dal from './assets/images/brands/dark-and-lovely.jpg';
+import happy from './assets/images/brands/happy-poppers.jpg';
+import kashrite from './assets/images/brands/kashrite.jpg';
+import ihp from './assets/images/brands/ihp.jpg';
+import kfc from './assets/images/brands/kfc.jpg';
+import kitchen from './assets/images/brands/kitchen.jpg';
+import Image from './assets/images/Image.jpg';
 
 const App = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState({});
-  const [selectedTestimonial, setSelectedTestimonial] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [email, setEmail] = useState('');
 
-  const currentYear = new Date().getFullYear();
+  const images = [andrews, ashar, boutique, dal, happy, kashrite, ihp, kfc, kitchen];
 
-  // Scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -38,376 +27,278 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for fade-in animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({
-              ...prev,
-              [entry.target.id]: true,
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const handleWhatsAppRedirect = () => {
+    // Replace this with your actual WhatsApp number
+    const whatsappNumber = '1234567890';
+    const message = 'Hello! I\'m interested in working with BildUp.';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const services = [
     {
-      title: "Content Strategy",
-      description: "Strategic content planning that drives engagement and conversions.",
-      icon: <BookOpen className="w-8 h-8 text-purple-500 group-hover:scale-110 transition-transform duration-300" />,
-      gradient: "from-purple-500 to-pink-500"
+      title: "Strategic Brand Consulting",
+      description: "Comprehensive brand strategy development and consulting services to elevate your market presence."
     },
     {
-      title: "Social Media Management",
-      description: "Building your brand presence across all social platforms.",
-      icon: <Megaphone className="w-8 h-8 text-blue-500 group-hover:scale-110 transition-transform duration-300" />,
-      gradient: "from-blue-500 to-cyan-500"
+      title: "Digital Marketing",
+      description: "Data-driven digital marketing solutions that drive engagement and conversion."
     },
     {
-      title: "Creative Copywriting",
-      description: "Words that tell your story and inspire action.",
-      icon: <PenTool className="w-8 h-8 text-green-500 group-hover:scale-110 transition-transform duration-300" />,
-      gradient: "from-green-500 to-teal-500"
+      title: "Creative Services",
+      description: "Innovative design and content creation that brings your brand story to life."
     },
     {
-      title: "Brand Voice Development",
-      description: "Crafting your unique brand personality and tone.",
-      icon: <Palette className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform duration-300" />,
-      gradient: "from-orange-500 to-yellow-500"
+      title: "Political Frontier & Marketing",
+      description: "Specialized marketing strategies for political campaigns and public initiatives."
     }
   ];
 
-  const portfolio = [
+  const clientReviews = [
     {
-      title: "Tech Startup Rebranding",
-      category: "Content Strategy",
-      description: "Complete content overhaul and brand voice development for an emerging tech startup.",
-      metrics: ["400% engagement increase", "2M+ reach", "85% positive feedback"],
-      gradient: "from-purple-500 to-pink-500"
+      name: "Nike Oyedeji",
+      company: "CEO Of KITCHEN234",
+      review: "My overall experience working with you was excellent. You demonstrated a clear understanding of my brand and target audience, consistently delivering creative and well-aligned strategies. Your professionalism, attention to detail, and innovative approach were instrumental in strengthening my business's online presence."
     },
     {
-      title: "Social Growth Campaign",
-      category: "Social Media",
-      description: "Strategic social media campaign for a sustainable fashion brand.",
-      metrics: ["200K new followers", "1.5M impressions", "32% conversion rate"],
-      gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "E-commerce Copy Update",
-      category: "Copywriting",
-      description: "Website copy optimization for a leading e-commerce platform.",
-      metrics: ["150% conversion boost", "45% bounce rate reduction", "3x sales"],
-      gradient: "from-green-500 to-teal-500"
+      name: "Mr Chucs Ahiakwo",
+      company: "KashRite",
+      review: "Joke contributed much value to my organisation, helping us stay in the customer's face and to do business with us. Co-founder of KashRite"
     }
   ];
-
-  const testimonials = [
-    {
-      text: "Sarah's approach to content strategy transformed our brand's digital presence. The results exceeded our expectations.",
-      author: "Emma Thompson",
-      role: "Marketing Director, TechVision",
-      rating: 5
-    },
-    {
-      text: "Working with Sarah was a game-changer for our social media presence. Her strategic insights and creative direction were invaluable.",
-      author: "Michael Chen",
-      role: "CEO, GrowthLabs",
-      rating: 5
-    },
-    {
-      text: "The quality of content and attention to detail is outstanding. Our engagement metrics have never been better.",
-      author: "Jessica Williams",
-      role: "Brand Manager, EcoStyle",
-      rating: 5
-    }
-  ];
-
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#181818] to-[#ff6b00]/10 font-sans">
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/80 backdrop-blur shadow-lg' : 'bg-transparent'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-              Adejoke Adegoke
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              <a href="#services" className="text-gray-700 hover:text-purple-600 transition-colors">Services</a>
-              <a href="#portfolio" className="text-gray-700 hover:text-purple-600 transition-colors">Portfolio</a>
-              <a href="#testimonials" className="text-gray-700 hover:text-purple-600 transition-colors">Testimonials</a>
-              <a href="#contact" className="text-gray-700 hover:text-purple-600 transition-colors">Contact</a>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-purple-600 transition-colors"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+          <img src={Logo} alt="BildUp Logo" className="h-24 md:h-32 transition-all" />
+          <div className="flex items-center gap-8">
+            <a
+              href="#services"
+              className={`font-medium transition-colors hidden md:inline ${
+                isScrolled ? 'text-gray-900 hover:text-orange-500' : 'text-white hover:text-orange-400'
+              }`}
+            >
+              Services
+            </a>
+            <a
+              href="#about"
+              className={`font-medium transition-colors hidden md:inline ${
+                isScrolled ? 'text-gray-900 hover:text-orange-500' : 'text-white hover:text-orange-400'
+              }`}
+            >
+              About
+            </a>
+            <a
+              href="#clients"
+              className={`font-medium transition-colors hidden md:inline ${
+                isScrolled ? 'text-gray-900 hover:text-orange-500' : 'text-white hover:text-orange-400'
+              }`}
+            >
+              Clients
+            </a>
+            <a
+              href="#contact"
+              className={`font-medium transition-colors hidden md:inline ${
+                isScrolled ? 'text-gray-900 hover:text-orange-500' : 'text-white hover:text-orange-400'
+              }`}
+            >
+              Contact
+            </a>
+            <button
+              onClick={handleWhatsAppRedirect}
+              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-6 py-2 rounded-full shadow-lg font-semibold transition-all"
+            >
+              Let's Collaborate
+            </button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute w-full bg-white/90 backdrop-blur-md shadow-lg">
-            <div className="px-4 pt-2 pb-3 space-y-1">
-              <a href="#services" className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors">
-                Services
-              </a>
-              <a href="#portfolio" className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors">
-                Portfolio
-              </a>
-              <a href="#testimonials" className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors">
-                Testimonials
-              </a>
-              <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors">
-                Contact
-              </a>
-            </div>
-          </div>
-        )}
       </nav>
 
-      {/* Hero Section with Dynamic Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <FloatingShapes />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center" data-animate id="hero">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 animate-gradient-x">
-                Transforming Ideas
-              </span>
-              <br />
-              <span className="text-gray-800">
-                Into Digital Impact
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
-              Content strategist & social media expert helping brands create meaningful connections in the digital space.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#contact"
-                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-xl hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
-              >
-                Start Your Project
-              </a>
-              <a
-                href="#portfolio"
-                className="px-8 py-4 bg-white text-gray-800 font-medium rounded-xl hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl border border-gray-200"
-              >
-                View Portfolio
-              </a>
-            </div>
-          </div>
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 pb-16">
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Modern SVG background */}
+          <svg className="w-full h-full" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="radial" cx="50%" cy="50%" r="80%" fx="50%" fy="50%" gradientTransform="rotate(45)">
+                <stop offset="0%" stopColor="#ff6b00" stopOpacity="0.12" />
+                <stop offset="100%" stopColor="#0a0a0a" stopOpacity="0.0" />
+              </radialGradient>
+            </defs>
+            <rect width="1440" height="900" fill="url(#radial)" />
+            <circle cx="1200" cy="200" r="180" fill="#ff6b00" fillOpacity="0.07" />
+            <circle cx="300" cy="700" r="120" fill="#ff6b00" fillOpacity="0.04" />
+          </svg>
         </div>
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-6 h-6 text-gray-400" />
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent mb-6 drop-shadow-lg">
+            Elevate Your Digital Story
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-200 mb-10 font-light">
+            I craft magnetic brands, viral content, and digital experiences that set you apart in a noisy world.
+          </p>
+          <button
+            onClick={handleWhatsAppRedirect}
+            className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 px-10 py-4 rounded-full text-lg font-bold shadow-xl text-white flex items-center justify-center mx-auto gap-2 group"
+          >
+            <span>Start Your Project</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-            Services
+      <section id="services" className="py-24 bg-white/90 backdrop-blur">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-gray-900 tracking-tight">
+            What I Do Best
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-12">
             {services.map((service, index) => (
-              <div
-                key={index}
-                data-animate
-                id={`service-${index}`}
-                className={`group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 ${
-                  isVisible[`service-${index}`] ? 'animate-fade-in' : 'opacity-0'
-                }`}
-              >
-                <div className="mb-6">{service.icon}</div>
-                <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
-                <div className={`h-1 w-20 mt-6 rounded-full bg-gradient-to-r ${service.gradient} transform origin-left scale-0 group-hover:scale-100 transition-transform duration-300`} />
+              <div key={index} className="bg-gradient-to-br from-orange-50 to-white rounded-2xl shadow-lg p-8 hover:scale-105 transition-transform group">
+                <h3 className="text-2xl font-bold mb-4 text-orange-600 group-hover:text-pink-600 transition-colors">{service.title}</h3>
+                <p className="text-gray-700 text-lg">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Portfolio Section */}
-  <section id="portfolio" className="py-20 bg-gray-50">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-        Featured Work
-      </h2>
-      <div className="grid md:grid-cols-3 gap-8">
-        {portfolio.map((project, index) => (
-          <div
-            key={index}
-            data-animate
-            id={`portfolio-${index}`}
-            className={`group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden ${
-              isVisible[`portfolio-${index}`] ? 'animate-fade-in' : 'opacity-0'
-            }`}
-          >
-            <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <p className="text-sm text-gray-500 mb-2">{project.category}</p>
-                  <h3 className="text-xl font-semibold">{project.title}</h3>
-                </div>
-                <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
-              </div>
-              <p className="text-gray-600 mb-6">{project.description}</p>
-              <div className="space-y-2">
-                {project.metrics.map((metric, idx) => (
-                  <div key={idx} className="flex items-center text-sm text-gray-500">
-                    <div className="w-1 h-1 rounded-full bg-gray-300 mr-2" />
-                    {metric}
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* Founder Bio Section */}
+      <section id="about" className="py-24 bg-gradient-to-br from-white via-orange-50 to-pink-50">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
+          <div className="md:w-1/2 flex justify-center">
+            <img src={Image} alt="Founder" className="w-80 h-96 object-cover rounded-3xl shadow-2xl border-4 border-orange-100" />
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Testimonials Section */}
-  <section id="testimonials" className="py-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-        Client Reviews
-      </h2>
-      <div className="grid md:grid-cols-3 gap-8">
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={index}
-            data-animate
-            id={`testimonial-${index}`}
-            className={`bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl ${
-              isVisible[`testimonial-${index}`] ? 'animate-fade-in' : 'opacity-0'
-            }`}
-          >
-            <div className="flex mb-4">
-              {[...Array(testimonial.rating)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-              ))}
-            </div>
-            <p className="text-gray-600 mb-6 italic">{testimonial.text}</p>
-            <div className="border-t pt-4">
-              <p className="font-semibold">{testimonial.author}</p>
-              <p className="text-sm text-gray-500">{testimonial.role}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Contact Section */}
-  <section id="contact" className="py-20 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-10" />
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-          Let's Create Something Amazing
-        </h2>
-        <p className="text-xl text-gray-600 mb-12">
-          Ready to transform your digital presence? Let's discuss how we can help your brand stand out and connect with your audience.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-          <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-xl hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center gap-2">
-            <Mail className="w-5 h-5" />
-            Get in Touch
-          </button>
-          <button className="px-8 py-4 bg-white text-gray-800 font-medium rounded-xl hover:bg-gray-50 transition-colors shadow-lg border border-gray-200 flex items-center justify-center gap-2">
-            <ArrowRight className="w-5 h-5" />
-            <a href="#services">View Services</a>
-          </button>
-        </div>
-        <div className="flex justify-center space-x-6">
-          {[
-            { icon: <Twitter className="w-6 h-6" />, label: 'Twitter', url: 'https://x.com' },
-            { icon: <Instagram className="w-6 h-6" />, label: 'Instagram', url: 'https://x.com'},
-            { icon: <Linkedin className="w-6 h-6" />, label: 'LinkedIn', url: 'https://x.com' },
-            { icon: <Mail className="w-6 h-6" />, label: 'Email', url: 'https://x.com' }
-          ].map((social, index) => (
-            <a
-              key={index}
-              href={social.url}
-              className="text-gray-600 hover:text-purple-600 transition-colors"
-              aria-label={social.label}
+          <div className="md:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900">Meet Joke</h2>
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              Hi, I'm Joke — a digital content expert, brand storyteller, and creative strategist. I help brands, creators, and organizations build magnetic digital identities, craft viral campaigns, and connect with audiences in ways that matter.
+            </p>
+            <ul className="mb-6 space-y-2 text-gray-600">
+              <li>• 10+ years in digital content, branding, and marketing</li>
+              <li>• Award-winning campaigns for global and local brands</li>
+              <li>• Passionate about innovation, culture, and results</li>
+            </ul>
+            <button
+              onClick={handleWhatsAppRedirect}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-md transition-all"
             >
-              {social.icon}
+              Book a Discovery Call
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Logos Section */}
+      <section id="clients" className="py-28 bg-gradient-to-br from-white via-orange-50 to-pink-50 relative overflow-hidden">
+        {/* Animated background shapes for visual interest */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-100 rounded-full opacity-30 blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-pink-100 rounded-full opacity-30 blur-3xl pointer-events-none"></div>
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-8 text-gray-900 tracking-tight">
+            Trusted by Leading Brands
+          </h2>
+          <p className="text-center text-lg md:text-xl text-gray-600 mb-14 max-w-2xl mx-auto">
+            I’ve partnered with innovative brands and organizations to create digital experiences that inspire, engage, and deliver results. Here are just a few:
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center justify-items-center">
+            {images.map((img, i) => (
+              <div
+                key={i}
+                className="group bg-white/80 rounded-xl shadow-lg p-4 flex items-center justify-center hover:scale-105 hover:shadow-2xl transition-all duration-300 border border-orange-100"
+              >
+                <img
+                  src={img}
+                  alt={`Client ${i + 1}`}
+                  className="h-20 w-auto object-contain grayscale group-hover:grayscale-0 group-hover:opacity-100 opacity-80 transition-all duration-300"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="mt-14 flex flex-col md:flex-row items-center justify-center gap-6">
+            <span className="text-gray-700 text-lg">Want to join this list?</span>
+            <button
+              onClick={handleWhatsAppRedirect}
+              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-8 py-3 rounded-full font-semibold shadow-md transition-all"
+            >
+              Let's Work Together
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-24 bg-gradient-to-br from-orange-50 via-white to-pink-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-14 text-gray-900">What Clients Say</h2>
+          <div className="grid md:grid-cols-2 gap-10">
+            {clientReviews.map((review, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-xl p-8 border-l-8 border-orange-400">
+                <p className="text-lg text-gray-700 italic mb-6">“{review.review}”</p>
+                <div className="flex items-center gap-4">
+                  {/* <img
+                    src="https://www.svgrepo.com/show/382106/avatar-boy.svg"
+                    //alt={review.name}
+                    className="w-12 h-12 rounded-full border-2 border-orange-200 bg-white object-cover"
+                  /> */}
+                  <div>
+                    <h4 className="font-bold text-gray-900">{review.name}</h4>
+                    <p className="text-gray-500 text-sm">{review.company}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-8 bg-[#0a0a0a] text-white">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent">
+            Ready to Make Your Mark?
+          </h2>
+          <p className="text-lg mb-8 text-gray-200">
+            Let's create something unforgettable. Reach out for a free consultation or just say hi!
+          </p>
+          <button
+            onClick={handleWhatsAppRedirect}
+            className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 px-10 py-4 rounded-full text-lg font-bold shadow-xl text-white flex items-center justify-center mx-auto gap-2 group"
+          >
+            <span>Contact Us</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-white py-0">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+          <img src={FooterLogo} alt="BildUp Logo" className="h-16 md:h-20" />
+          <div className="flex gap-6">
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+              <Instagram className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
             </a>
-          ))}
+            <a href="mailto:Info@bildup.net">
+              <Mail className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
+            </a>
+            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
+              <Facebook className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
+            </a>
+            <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer">
+              <Youtube className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
+            </a>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  {/* Footer */}
-  <footer className="py-8 bg-gray-50">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <p className="text-gray-500 mb-4 md:mb-0">
-          © {currentYear} Adejoke Adegoke. All rights reserved.
-        </p>
-        <div className="flex space-x-6">
-          <a href="#" className="text-gray-500 hover:text-purple-600 transition-colors">Privacy Policy</a>
-          <a href="#" className="text-gray-500 hover:text-purple-600 transition-colors">Terms of Service</a>
+        <div className="mt-8 text-center text-gray-400 text-sm">
+          <p>© {new Date().getFullYear()} BildUp. All rights reserved.</p>
         </div>
-      </div>
-    </div>
-  </footer>
-      
-      {/* Add custom animations */}
-      <style jsx>{`
-        @keyframes gradient-x {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        .animate-gradient-x {
-          background-size: 200% auto;
-          animation: gradient-x 4s ease infinite;
-        }
-
-        @keyframes float-0 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -20px); } }
-        @keyframes float-1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-20px, 20px); } }
-        @keyframes float-2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(15px, 15px); } }
-        @keyframes float-3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-15px, -15px); } }
-        @keyframes float-4 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, -10px); } }
-        @keyframes float-5 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-10px, 10px); } }
-
-        .animate-float-0 { animation: float-0 infinite ease-in-out; }
-        .animate-float-1 { animation: float-1 infinite ease-in-out; }
-        .animate-float-2 { animation: float-2 infinite ease-in-out; }
-        .animate-float-3 { animation: float-3 infinite ease-in-out; }
-        .animate-float-4 { animation: float-4 infinite ease-in-out; }
-        .animate-float-5 { animation: float-5 infinite ease-in-out; }
-      `}</style>
+      </footer>
     </div>
   );
 };
