@@ -29,7 +29,7 @@ const App = () => {
 
   const handleWhatsAppRedirect = () => {
     // Replace this with your actual WhatsApp number
-    const whatsappNumber = '1234567890';
+    const whatsappNumber = '+2347087782222';
     const message = 'Hello! I\'m interested in working with BildUp.';
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
@@ -281,18 +281,18 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
           <img src={FooterLogo} alt="BildUp Logo" className="h-16 md:h-20" />
           <div className="flex gap-6">
-            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/bildupng?igsh=MWx6ZTdxczA3YXUzbw==" target="_blank" rel="noopener noreferrer">
               <Instagram className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
             </a>
             <a href="mailto:Info@bildup.net">
               <Mail className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
             </a>
-            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
+            {/* <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
               <Facebook className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
             </a>
             <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer">
               <Youtube className="w-6 h-6 text-orange-500 hover:text-pink-500 transition-colors" />
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="mt-8 text-center text-gray-400 text-sm">
