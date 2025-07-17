@@ -5,7 +5,6 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ReactTyped } from "react-typed";
 import { Instagram, Mail, PhoneIcon } from 'lucide-react';
 import Logo from './assets/images/logo/logo.png';
-import FooterLogo from './assets/images/logo/footer-logo.png';
 import andrews from './assets/images/brands/andrews.jpg';
 import ashar from './assets/images/brands/ashar.jpg';
 import boutique from './assets/images/brands/boutique.jpg';
