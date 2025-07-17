@@ -3,7 +3,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ReactTyped } from "react-typed";
-import { Instagram, Mail, Facebook, Youtube, Globe, ArrowRight, PhoneIcon } from 'lucide-react';
+import { Instagram, Mail, PhoneIcon } from 'lucide-react';
 import Logo from './assets/images/logo/logo.png';
 import FooterLogo from './assets/images/logo/footer-logo.png';
 import andrews from './assets/images/brands/andrews.jpg';
